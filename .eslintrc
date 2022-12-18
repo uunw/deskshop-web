@@ -28,14 +28,14 @@
         "plugin:tailwindcss/recommended",
         "airbnb-typescript",
         "next/core-web-vitals",
-        "plugin:prettier/recommended"
+        "prettier"
       ],
       "parserOptions": {
         "project": "./tsconfig.json"
       },
       "rules": {
         "prettier/prettier": [
-          "error",
+          "warn",
           {
             "singleQuote": true,
             "endOfLine": "auto"
@@ -56,7 +56,8 @@
         "unused-imports/no-unused-vars": [
           "error",
           { "argsIgnorePattern": "^_" }
-        ]
+        ],
+        "quotes": [1, "backtick"]
       }
     },
     // Configuration for testing

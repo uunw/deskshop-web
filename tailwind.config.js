@@ -1,7 +1,13 @@
+/* eslint-disable global-require */
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: `class`,
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
+    fontFamily: {
+      sans: [`Noto Sans`, `Noto Sans Thai`, `sans-serif`],
+      serif: [`Noto Serif`],
+    },
     fontSize: {
       xs: '0.75rem',
       sm: '0.875rem',
@@ -41,5 +47,8 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/aspect-ratio'),
+    require('@tailwindcss/forms'),
+  ],
 };

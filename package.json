@@ -2,6 +2,7 @@
   "name": "deskshop-web",
   "private": true,
   "license": "MIT",
+  "packageManager": "pnpm@7.18.2",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

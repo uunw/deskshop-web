@@ -60,7 +60,7 @@ jobs:
 
       - name: Linter
         # run: npm run lint
-      - run: pnpm lint
+        run: pnpm lint
 
       - name: Type checking
         # run: npm run check-types

@@ -2,6 +2,9 @@
   "name": "deskshop-web",
   "private": true,
   "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
   "packageManager": "pnpm@7.18.2",
   "scripts": {
     "dev": "next dev",
@@ -24,11 +27,17 @@
     "postbuild": "next-sitemap"
   },
   "dependencies": {
+    "@auth0/nextjs-auth0": "^2.0.1",
     "@headlessui/react": "^1.7.5",
     "@heroicons/react": "^2.0.13",
+    "@hookform/resolvers": "^2.9.10",
+    "@supabase/auth-helpers-nextjs": "^0.5.2",
+    "@supabase/auth-helpers-react": "^0.3.1",
+    "@supabase/auth-ui-react": "^0.2.6",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.3",
     "ahooks": "^3.7.2",
+    "axios": "^1.2.1",
     "dotenv": "^16.0.3",
     "graphql": "^16.6.0",
     "graphql-yoga": "^3.1.1",
@@ -42,6 +51,7 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.40.0",
     "react-i18next": "^12.1.1",
+    "react-lottie-player": "^1.5.0",
     "zod": "^3.20.2"
   },
   "devDependencies": {

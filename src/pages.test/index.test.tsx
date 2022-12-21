@@ -10,19 +10,9 @@ describe(`Index page`, () => {
     it(`should have h1 tag`, async () => {
       render(<Index />);
 
-      // const heading = await findByText(`Your room, your rules`);
-      // const heading = await screen.findByText('Your room, your rules', {
-      //   // name: /Boilerplate code/,
-      // });
-
-      // expect(heading).toBeIn;
-
-      await waitFor(() => {
-        expect(screen.getByText(`Your room, your rules`)).toBeInstanceOf(
-          <h1 />,
-        );
+      await waitFor(async () => {
+        expect(await screen.findByText(`Your room, your rules`)).toBe(<h1 />);
       });
-      // expect(heading).toBeIn
     });
   });
 });

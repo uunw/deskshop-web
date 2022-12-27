@@ -1,13 +1,17 @@
 import '../styles/global.css';
 
-import { useCounter, useInterval } from 'ahooks';
+import { ApolloProvider } from '@apollo/client';
+import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs';
+import { SessionContextProvider } from '@supabase/auth-helpers-react';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 import type { ReactElement, ReactNode } from 'react';
+import { useState } from 'react';
 
+import { client } from '@/libs/apollo';
 import { AppConfig } from '@/utils/AppConfig';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
@@ -20,15 +24,9 @@ type AppPropsWithLayout = AppProps & {
 
 const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
   const router = useRouter();
+  const [supabaseClient] = useState(() => createBrowserSupabaseClient());
+
   const getLayout = Component.getLayout ?? ((page) => page);
-
-  const [healthCheckCount, { inc: incHealthCheckCount }] = useCounter();
-
-  useInterval(() => {
-    incHealthCheckCount();
-
-    console.log(`health check`, healthCheckCount);
-  }, 5000);
 
   return (
     <>
@@ -65,7 +63,14 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
         defaultTitle={AppConfig.title}
       />
 
-      {getLayout(<Component {...pageProps} />)}
+      <SessionContextProvider
+        supabaseClient={supabaseClient}
+        initialSession={pageProps.initialSession}
+      >
+        <ApolloProvider client={client}>
+          {getLayout(<Component {...pageProps} />)}
+        </ApolloProvider>
+      </SessionContextProvider>
     </>
   );
 };

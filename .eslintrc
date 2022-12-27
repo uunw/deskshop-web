@@ -57,7 +57,8 @@
           "error",
           { "argsIgnorePattern": "^_" }
         ],
-        "quotes": [1, "backtick"]
+        "quotes": [1, "backtick"],
+        "no-underscore-dangle": "off"
       }
     },
     // Configuration for testing

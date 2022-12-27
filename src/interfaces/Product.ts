@@ -20,19 +20,14 @@ type ProductSize = {
 };
 
 interface IProduct {
-  productid: string;
+  productId: string;
   type: ProductType;
   name: string;
   description: string;
   price: number;
   colors: ProductColor[];
-  highlights: string[];
   details: string;
   size?: ProductSize;
-  breadcrumbs: {
-    name: string;
-    href: string;
-  }[];
   images: ProductImage[];
 }
 

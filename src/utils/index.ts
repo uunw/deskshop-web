@@ -17,4 +17,23 @@ function getProductType(type: ProductType) {
   }
 }
 
-export { classNames, getProductType };
+function parseBearerToken(token: string | undefined): string | undefined {
+  if (!token) return undefined;
+
+  // Find the Bearer token in the Authorization header.
+  const found = token.match(`/^Bearers+([A-Za-z0-9-._~+/]+)=*$/`);
+
+  // Return Bearer token.
+  return found ? found[1] : undefined;
+}
+
+function signIn() {
+  window.open(
+    `http://localhost:3000/auth/signin`,
+    `mozillaWindow`,
+    // eslint-disable-next-line no-restricted-globals
+    `popup,left=${screen.width / 2 - 250},top=100,width=500,height=600`,
+  );
+}
+
+export { classNames, getProductType, parseBearerToken, signIn };

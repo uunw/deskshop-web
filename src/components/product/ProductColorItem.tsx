@@ -22,8 +22,8 @@ const ProductColorItem: FC<IProps> = ({ name, image, inStock }) => {
           inStock
             ? `bg-black shadow-sm text-gray-900 cursor-pointer`
             : `bg-gray-50 text-gray-200 cursor-not-allowed`,
-          active ? `ring-2 ring-gray-900` : ``,
-          `group relative border rounded-md py-1 px-1 flex items-center justify-center uppercase hover:bg-gray-50 focus:outline-none sm:flex-1`,
+          active ? `ring-1 ring-gray-900` : ``,
+          `group relative border rounded-md py-1 px-1 flex items-center justify-center uppercase bg-gray-50 outline-none sm:flex-1`,
         )
       }
     >
@@ -42,7 +42,7 @@ const ProductColorItem: FC<IProps> = ({ name, image, inStock }) => {
                 checked ? `border-gray-500` : `border-transparent`,
                 `pointer-events-none absolute -inset-px rounded-md`,
               )}
-              aria-hidden={true}
+              aria-hidden
             />
           ) : (
             <ProductColorBoxOutOfStock />

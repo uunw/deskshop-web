@@ -1,5 +1,4 @@
 import { RadioGroup } from '@headlessui/react';
-import { useCounter } from 'ahooks';
 import type { FC } from 'react';
 
 import type { ProductColor } from '@/interfaces/Product';
@@ -8,15 +7,22 @@ import ProductColorItem from './ProductColorItem';
 
 interface IProps {
   colors: ProductColor[];
+  selectedColor: number;
+  setSelectedColor: (v: number) => void;
 }
 
-const ProductColorBox: FC<IProps> = ({ colors }) => {
-  const [selectedColor, { set: setSelectedColor }] = useCounter(0);
-
+const ProductColorBox: FC<IProps> = ({
+  colors,
+  selectedColor,
+  setSelectedColor,
+}) => {
   return (
     <RadioGroup
       value={selectedColor}
-      onChange={setSelectedColor}
+      onChange={(v: number) => {
+        setSelectedColor(v);
+        console.log(v);
+      }}
       className="mt-4"
     >
       <RadioGroup.Label className="sr-only">{`เลือกสี`}</RadioGroup.Label>

@@ -1,4 +1,3 @@
-import NextLink from 'next/link';
 import type { FC } from 'react';
 
 import type { ProductType } from '@/interfaces/Product';
@@ -25,13 +24,13 @@ const ProductBreadcrumbBox: FC<IProps> = ({ productType, productName }) => {
         />
 
         <li className="text-sm">
-          <NextLink
-            href="/"
+          <p
+            // href="/"
             aria-current="page"
-            className="font-medium text-gray-500 hover:text-gray-600"
+            className="font-medium text-gray-500"
           >
             {productName}
-          </NextLink>
+          </p>
         </li>
       </ol>
     </nav>

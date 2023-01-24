@@ -13,10 +13,7 @@ interface IProps {
 const ProductBreadcrumbBox: FC<IProps> = ({ productType, productName }) => {
   return (
     <nav aria-label="Breadcrumb">
-      <ol
-        role="list"
-        className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8"
-      >
+      <ol className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
         <BreadCrumbItem href="/product" name="สินค้า" />
         <BreadCrumbItem
           href="/product?type=desk"

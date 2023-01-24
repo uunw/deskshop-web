@@ -10,6 +10,7 @@ import {
   Squares2X2Icon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
+import NextLink from 'next/link';
 import type { FC } from 'react';
 import { Fragment } from 'react';
 
@@ -126,19 +127,12 @@ const NavbarMobile: FC = () => {
           </div>
           <div className="space-y-6 py-6 px-5">
             <div className="grid grid-cols-2 gap-y-4 gap-x-8">
-              <a
-                href="#"
+              <NextLink
+                href="/"
                 className="text-base font-medium text-gray-900 hover:text-gray-700"
               >
                 Pricing
-              </a>
-
-              <a
-                href="#"
-                className="text-base font-medium text-gray-900 hover:text-gray-700"
-              >
-                Docs
-              </a>
+              </NextLink>
               {resources.map((item) => (
                 <a
                   key={item.name}
@@ -150,17 +144,20 @@ const NavbarMobile: FC = () => {
               ))}
             </div>
             <div>
-              <a
-                href="#"
+              <NextLink
+                href="/"
                 className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
               >
                 Sign up
-              </a>
+              </NextLink>
               <p className="mt-6 text-center text-base font-medium text-gray-500">
                 Existing customer?{` `}
-                <a href="#" className="text-indigo-600 hover:text-indigo-500">
+                <NextLink
+                  href="/"
+                  className="text-indigo-600 hover:text-indigo-500"
+                >
                   Sign in
-                </a>
+                </NextLink>
               </p>
             </div>
           </div>

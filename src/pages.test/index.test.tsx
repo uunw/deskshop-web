@@ -11,7 +11,7 @@ describe(`Index page`, () => {
       render(<Index />);
 
       await waitFor(async () => {
-        expect(await screen.findByText(`Your room, your rules`)).toBe(<h1 />);
+        expect(await screen.findByText(`Your room, your rules`)).toBe(`h1`);
       });
     });
   });

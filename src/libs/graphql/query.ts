@@ -7,8 +7,7 @@ import {
 } from 'graphql';
 
 import type { IProduct } from '@/interfaces/Product';
-
-import supabase from '../supabase';
+import { supabaseClient } from '@/libs/supabase';
 
 const graphqlProductType = new GraphQLObjectType<IProduct, unknown>({
   name: `Product`,
@@ -37,7 +36,7 @@ const query = new GraphQLObjectType<number, number>({
     getProducts: {
       type: new GraphQLList(graphqlProductType),
       resolve: async () => {
-        const { error, data } = await supabase.from(`products`).select();
+        const { error, data } = await supabaseClient.from(`products`).select();
         if (error) throw new GraphQLError(`can't query products`);
 
         return data;

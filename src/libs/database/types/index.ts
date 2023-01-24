@@ -1,22 +1,35 @@
+enum Role {
+  USER,
+  ADMIN,
+}
 interface Database {
   public: {
     Tables: {
-      movies: {
-        Row: {}; // The data expected to be returned from a "select" statement.
-        Insert: {}; // The data expected passed to an "insert" statement.
-        Update: {}; // The data expected passed to an "update" statement.
-      };
       products: {
-        Row: {}; // The data expected to be returned from a "select" statement.
-        Insert: {}; // The data expected passed to an "insert" statement.
-        Update: {}; // The data expected passed to an "update" statement.
+        Row: {};
+        Insert: {};
+        Update: {};
       };
       profiles: {
         Row: {
-          full_name: string;
-          email: string;
+          id: string;
+          email: string | null;
+          full_name: string | null;
+          role: Role;
+          avatar_url: string | null;
+          created_at: string | null;
+          updated_at: string | null;
         };
       };
+    };
+    Views: {
+      [_ in never]: never;
+    };
+    Functions: {
+      [_ in never]: never;
+    };
+    Enums: {
+      [_ in never]: never;
     };
   };
 }

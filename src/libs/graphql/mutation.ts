@@ -5,8 +5,13 @@ import {
   GraphQLString,
 } from 'graphql';
 
-import supabase from '../supabase';
+import { supabaseClient } from '@/libs/supabase';
+import { log } from '@/utils';
+
 import { graphqlProductType } from './query';
+
+type SignInArg = { email: string; password: string };
+type SignUpArg = { email: string; username: string; password: string };
 
 const mutation = new GraphQLObjectType({
   name: `Mutation`,
@@ -23,8 +28,8 @@ const mutation = new GraphQLObjectType({
           description: `user password`,
         },
       },
-      resolve: async (_, { email, password }) => {
-        const { data, error } = await supabase.auth.signInWithPassword({
+      resolve: async (_, { email, password }: SignInArg) => {
+        const { data, error } = await supabaseClient.auth.signInWithPassword({
           email,
           password,
         });
@@ -47,13 +52,10 @@ const mutation = new GraphQLObjectType({
           type: GraphQLString,
         },
       },
-      resolve: async (
-        _,
-        args: { email: string; username: string; password: string },
-      ) => {
-        console.log(args);
+      resolve: async (_, args: SignUpArg) => {
+        log(args);
 
-        const { data, error } = await supabase.auth.signUp({
+        const { data, error } = await supabaseClient.auth.signUp({
           email: args.email,
           password: args.password,
           options: {

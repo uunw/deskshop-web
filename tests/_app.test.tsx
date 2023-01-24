@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker';
 import { waitFor } from '@testing-library/react';
 import type { ReactNode } from 'react';
 
@@ -14,12 +15,10 @@ jest.mock(
 describe(`MyApp component`, () => {
   describe(`Render method`, () => {
     it(`should a page title`, async () => {
-      const title = `Random title`;
-
-      // render(<MyApp title={title} description="Random description" />);
+      // render(<MyApp  />);
 
       await waitFor(() => {
-        expect(document.title).toEqual(title);
+        expect(document.title).toEqual(faker.company.name);
       });
     });
   });

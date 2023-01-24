@@ -22,10 +22,12 @@
         "@typescript-eslint",
         "unused-imports",
         "tailwindcss",
-        "simple-import-sort"
+        "simple-import-sort",
+        "jsx-a11y"
       ],
       "extends": [
         "plugin:tailwindcss/recommended",
+        "plugin:jsx-a11y/recommended",
         "airbnb-typescript",
         "next/core-web-vitals",
         "prettier"

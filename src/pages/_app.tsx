@@ -1,30 +1,48 @@
 import '../styles/global.css';
 
 import { ApolloProvider } from '@apollo/client';
-import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs';
-import { SessionContextProvider } from '@supabase/auth-helpers-react';
+import type { Session } from '@supabase/auth-helpers-nextjs';
+import {
+  SessionContextProvider,
+  useSession,
+  useUser,
+} from '@supabase/auth-helpers-react';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 import type { ReactElement, ReactNode } from 'react';
-import { useState } from 'react';
+import { useEffect } from 'react';
 
 import { client } from '@/libs/apollo';
+import { supabaseBrowserClient } from '@/libs/supabase';
 import { AppConfig } from '@/utils/AppConfig';
 
-export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+export type NextPageWithLayout<P = Props, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
 
-type AppPropsWithLayout = AppProps & {
-  Component: NextPageWithLayout;
+type Props = {
+  initialSession?: Session;
+};
+
+type AppPropsWithLayout = AppProps<Props> & {
+  Component?: NextPageWithLayout;
 };
 
 const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
   const router = useRouter();
-  const [supabaseClient] = useState(() => createBrowserSupabaseClient());
+  const session = useSession();
+  const user = useUser();
+  // const [supabaseClient] = useState(() => createBrowserSupabaseClient());
+
+  useEffect(() => {
+    if (session || user) {
+      // location.reload();
+      router.reload();
+    }
+  }, [session, user]);
 
   const getLayout = Component.getLayout ?? ((page) => page);
 
@@ -64,7 +82,7 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
       />
 
       <SessionContextProvider
-        supabaseClient={supabaseClient}
+        supabaseClient={supabaseBrowserClient}
         initialSession={pageProps.initialSession}
       >
         <ApolloProvider client={client}>
@@ -75,5 +93,4 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
   );
 };
 
-// @ts-ignore
 export default MyApp;

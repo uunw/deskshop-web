@@ -1,7 +1,11 @@
 import { Dialog } from '@headlessui/react';
-import { XMarkIcon } from '@heroicons/react/24/outline';
+import { ArrowLongRightIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import NextImage from 'next/image';
 import NextLink from 'next/link';
 import type { FC } from 'react';
+
+import AppImage from '@/public/IDS.png';
+import { AppConfig } from '@/utils/AppConfig';
 
 interface IProps {
   state: boolean;
@@ -18,13 +22,19 @@ const HomeMobileNavbar: FC<IProps> = ({ onClose, state, navigation }) => {
       >
         <div className="flex h-9 items-center justify-between">
           <div className="flex">
-            <NextLink href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
-              <img
+            <NextLink href="/" className="-m-1.5 p-1.5">
+              <span className="sr-only">{AppConfig.title}</span>
+              <NextImage
+                src={AppImage}
+                alt={AppConfig.title}
+                quality={90}
+                className="h-10 w-auto rounded shadow"
+              />
+              {/* <img
                 className="h-8"
                 src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
                 alt=""
-              />
+              /> */}
             </NextLink>
           </div>
           <div className="flex">
@@ -52,27 +62,16 @@ const HomeMobileNavbar: FC<IProps> = ({ onClose, state, navigation }) => {
               ))}
             </div>
             <div className="py-6">
-              {!true ? (
+              {!false ? (
                 <NextLink
                   href="/auth/signin"
                   className="-mx-3 flex space-x-5 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 py-2.5 px-3 font-bold leading-6 text-white hover:bg-gray-400/10"
                 >
                   {`เข้าสู่ระบบ`}
-
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
+                  <ArrowLongRightIcon
+                    className="h-6 w-auto"
                     strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="h-6 w-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-                    />
-                  </svg>
+                  />
                 </NextLink>
               ) : (
                 `hi a`

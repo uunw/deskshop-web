@@ -1,21 +1,18 @@
 import { LockClosedIcon } from '@heroicons/react/20/solid';
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { Session } from '@supabase/supabase-js';
-import type { GetServerSidePropsContext } from 'next';
+import type { GetServerSidePropsContext, NextPage } from 'next';
 import NextImage from 'next/image';
 import NextLink from 'next/link';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import AuthTemplate from '@/components/template/AuthTemplate';
 import { supbaseServerClient } from '@/libs/supabase';
 import { signInPassword } from '@/libs/supabase/auth';
 import AppImage from '@/public/IDS.png';
 import { log } from '@/utils';
 import { AppConfig } from '@/utils/AppConfig';
-
-import type { NextPageWithLayout } from '../_app';
 
 interface IForm {
   email: string;
@@ -31,7 +28,7 @@ interface IProps {
   session: Session | null;
 }
 
-const AuthSignInPage: NextPageWithLayout<IProps> = ({ session }) => {
+const AuthSignInPage: NextPage<IProps> = ({ session }) => {
   // const session = useSession();
   // const supabaseClient = useSupabaseClient();
 
@@ -176,14 +173,6 @@ const AuthSignInPage: NextPageWithLayout<IProps> = ({ session }) => {
           </button>
         </div>
       </form>
-    </>
-  );
-};
-
-AuthSignInPage.getLayout = (page) => {
-  return (
-    <>
-      <AuthTemplate>{page}</AuthTemplate>
     </>
   );
 };

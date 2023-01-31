@@ -33,7 +33,7 @@ function signIn() {
   window.open(
     process.env.NODE_ENV !== `production`
       ? `http://localhost:3000/auth/signin`
-      : window.location.hostname,
+      : `https://ikea-deskshop.vercel.app/auth/signin`,
     `mozillaWindow`,
     // eslint-disable-next-line no-restricted-globals
     `popup,left=${screen.width / 2 - 250},top=100,width=500,height=600`,

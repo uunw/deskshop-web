@@ -16,6 +16,7 @@ const ProductFilterForm: FC = () => {
   const { handleSubmit } = useForm<Input>();
 
   const onSubmit: SubmitHandler<Input> = (data) => {
+    // eslint-disable-next-line no-console
     console.log(data);
   };
 

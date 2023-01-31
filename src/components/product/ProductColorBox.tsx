@@ -21,7 +21,7 @@ const ProductColorBox: FC<IProps> = ({
       value={selectedColor}
       onChange={(v: number) => {
         setSelectedColor(v);
-        console.log(v);
+        // console.log(v);
       }}
       className="mt-4"
     >

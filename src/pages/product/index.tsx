@@ -1,3 +1,4 @@
+import { gql, useQuery } from '@apollo/client';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon, FunnelIcon } from '@heroicons/react/24/outline';
 import { useToggle } from 'ahooks';
@@ -7,6 +8,7 @@ import { Fragment } from 'react';
 
 import Navbar from '@/components/layouts/Navbar';
 import ProductMobileFilterDialog from '@/components/mobile/ProductMobileFilterDialog';
+import type { IProductDiscover } from '@/interfaces/Product';
 import { classNames } from '@/utils';
 
 import type { NextPageWithLayout } from '../_app';
@@ -23,59 +25,28 @@ const sortOptions = [
   { name: `เป็นที่นิยมมากที่สุด`, current: false },
 ];
 
-const products = [
-  {
-    product_id: `asd`,
-  },
-  {
-    product_id: `aaa`,
-    image: {
-      src: `https://www.ikea.com/th/th/images/products/lagkapten-adils-desk-black-brown-black__0976118_pe813034_s5.jpg?f=xxs`,
-    },
-  },
-  {
-    product_id: `bbbb`,
-    image: {
-      src: `https://www.ikea.com/th/th/images/products/lagkapten-adils-desk-white__1028363_pe835300_s5.jpg?f=xxs`,
-    },
-  },
-  {
-    product_id: `bbbb`,
-  },
-  {
-    product_id: `bbbb`,
-  },
-  {
-    product_id: `bbbb`,
-  },
-  {
-    product_id: `bbbb`,
-  },
-  {
-    product_id: `bbbb`,
-  },
-  {
-    product_id: `bbbb`,
-  },
-  {
-    product_id: `bbbb`,
-  },
-  {
-    product_id: `bbbb`,
-  },
-  {
-    product_id: `bbbb`,
-  },
-  {
-    product_id: `bbbb`,
-  },
-];
-
 const ProductHomePage: NextPageWithLayout = () => {
   const [
     mobileFiltersDialogState,
     { setLeft: closeMobileFilterDialog, setRight: openMobileFilterDialog },
   ] = useToggle();
+
+  const {
+    data: products,
+    loading,
+    error,
+  } = useQuery<{ getProducts: IProductDiscover[] }>(gql`
+    {
+      getProducts {
+        productId
+        name
+        price
+        imageCoverUrl
+      }
+    }
+  `);
+
+  if (error) return <>oh no</>;
 
   return (
     <>
@@ -167,24 +138,24 @@ const ProductHomePage: NextPageWithLayout = () => {
             <div className="grid grid-cols-1 gap-x-8 gap-y-10">
               {/* Product grid */}
               <div className="lg:col-span-3">
-                {products.length === 0 ? (
+                {loading && products ? (
                   <div className="h-96 rounded-lg border-4 border-dashed border-gray-200 lg:h-full">
                     <p className="mx-auto text-lg">{`ไม่มีสินค้าในระบบ`}</p>
                   </div>
                 ) : (
                   <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-                    {products.map((p, i) => (
+                    {products?.getProducts.map((p, i) => (
                       <DynamicProductItem
                         key={i}
                         image={{
-                          src: p.image?.src
-                            ? p.image.src
+                          src: p.imageCoverUrl
+                            ? p.imageCoverUrl
                             : `https://www.ikea.com/th/th/images/products/linnmon-adils-table-white__0737165_pe740925_s5.jpg?f=xxs`,
                           alt: `asd`,
                         }}
-                        name="LINNMON ลินมูน / ADILS อดิลส์"
-                        price={190}
-                        href={`/product/${p.product_id}`}
+                        name={p.name}
+                        price={p.price}
+                        href={`/product/${p.productId}`}
                       />
                     ))}
                   </div>

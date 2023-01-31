@@ -15,6 +15,7 @@ const SearchPage: NextPageWithLayout<IProps> = ({ searchQuery }) => {
   // const searchQuery: string = String(router.query.q);
 
   useEffect(() => {
+    // eslint-disable-next-line no-console
     console.log(searchQuery);
   }, [searchQuery]);
 

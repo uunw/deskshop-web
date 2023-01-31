@@ -113,7 +113,7 @@ const DashboardNavbar: FC = () => {
                                 `block px-4 py-2 text-sm text-gray-700`,
                               )}
                               onClick={async () => {
-                                console.log(`sing out`);
+                                // console.log(`sing out`);
 
                                 await supabaseBrowserClient.auth.signOut();
 

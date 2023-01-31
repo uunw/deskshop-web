@@ -83,6 +83,10 @@ DocuemntPage.getLayout = (page) => {
     <>
       <Navbar />
       {page}
+
+      <div>
+        <p className="text-center">นาย นนทพันธ์ อินทวงศ์ 65301280011</p>
+      </div>
     </>
   );
 };

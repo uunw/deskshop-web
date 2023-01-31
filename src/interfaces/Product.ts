@@ -20,15 +20,15 @@ type ProductSize = {
 };
 
 interface IProduct {
-  productId: string;
-  type: ProductType;
-  name: string;
-  description: string;
-  price: number;
-  colors: ProductColor[];
-  details: string;
+  productId?: string;
+  type?: ProductType;
+  name?: string;
+  description?: string;
+  price?: number;
+  colors?: ProductColor[];
+  details?: string;
   size?: ProductSize;
-  images: ProductImage[];
+  images?: ProductImage[];
 }
 
 // Product Home Page Filter
@@ -44,9 +44,17 @@ type ProductColorFilter = ProductColor & {
   isChecked: boolean;
 };
 
+interface IProductDiscover {
+  productId: string;
+  name: string;
+  price: number;
+  imageCoverUrl: string;
+}
+
 export { ProductType };
 export type {
   IProduct,
+  IProductDiscover,
   ProductColor,
   ProductColorFilter,
   ProductDisclosureType,

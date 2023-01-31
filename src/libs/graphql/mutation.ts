@@ -1,14 +1,14 @@
 import {
   GraphQLError,
   GraphQLID,
+  GraphQLInt,
   GraphQLObjectType,
   GraphQLString,
 } from 'graphql';
 
+import type { IProduct } from '@/interfaces/Product';
 import { supabaseClient } from '@/libs/supabase';
 import { log } from '@/utils';
-
-import { graphqlProductType } from './query';
 
 type SignInArg = { email: string; password: string };
 type SignUpArg = { email: string; username: string; password: string };
@@ -66,7 +66,7 @@ const mutation = new GraphQLObjectType({
         });
 
         if (error) {
-          console.error(error);
+          // console.error(error);
           throw new GraphQLError(error.message);
         }
 
@@ -88,11 +88,38 @@ const mutation = new GraphQLObjectType({
       },
     },
     addProduct: {
-      type: graphqlProductType,
+      type: new GraphQLObjectType({
+        name: `addProductReturn`,
+        fields: {
+          status: {
+            type: GraphQLInt,
+          },
+          statusText: {
+            type: GraphQLString,
+          },
+        },
+      }),
       args: {
         name: {
           type: GraphQLString,
         },
+        price: {
+          type: GraphQLInt,
+        },
+      },
+      resolve: async (_, { name, price }: { name: string; price: number }) => {
+        const product: IProduct = {
+          name,
+          price,
+        };
+
+        const { status, statusText, error } = await supabaseClient
+          .from(`products`)
+          .insert(product);
+
+        if (error) throw new GraphQLError(error.message);
+
+        return { status, statusText };
       },
     },
   },

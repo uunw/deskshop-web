@@ -1,11 +1,15 @@
 import NextLink from 'next/link';
 import { NextSeo } from 'next-seo';
+import { useEffect } from 'react';
 
 import HomeNavbar from '@/components/layouts/HomeNavbar';
 
 import type { NextPageWithLayout } from './_app';
 
 const HomePage: NextPageWithLayout = () => {
+  useEffect(() => {
+    document.body.classList.toggle(`overflow-hidden`, true);
+  });
   return (
     <>
       <NextSeo description="IKEA-DeskShop" />
@@ -71,7 +75,7 @@ const HomePage: NextPageWithLayout = () => {
                   <p className="mt-6 text-lg leading-8 text-gray-600 sm:text-center">
                     {`มีโต๊ะทำงานมากมายหลากหลายแบบให้คุณเลือก`}
                   </p>
-                  <div className="mt-8 flex gap-x-4 sm:justify-center">
+                  <div className="mt-10 flex items-center justify-center gap-x-6">
                     <NextLink
                       href="/product"
                       className="inline-block rounded-lg bg-blue-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-blue-600 transition-colors delay-100 ease-in-out hover:bg-blue-700 hover:ring-blue-700"
@@ -82,10 +86,10 @@ const HomePage: NextPageWithLayout = () => {
                       </span>
                     </NextLink>
                     <NextLink
-                      href="#"
-                      className="inline-block rounded-lg px-4 py-1.5 text-base font-semibold leading-7 text-gray-900 ring-1 ring-gray-900/10 hover:ring-gray-900/20"
+                      href="/about"
+                      className="text-base font-semibold leading-7 text-gray-900"
                     >
-                      Live demo
+                      {`เกี่ยวกับ`}
                       <span className="text-gray-400" aria-hidden="true">
                         &rarr;
                       </span>
@@ -125,6 +129,9 @@ const HomePage: NextPageWithLayout = () => {
         </main>
 
         {/* <Footer /> */}
+        <div>
+          <p className="text-center">นาย นนทพันธ์ อินทวงศ์ 65301280011</p>
+        </div>
       </div>
     </>
   );

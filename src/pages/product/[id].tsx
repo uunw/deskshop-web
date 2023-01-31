@@ -3,19 +3,18 @@ import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 import { useState } from 'react';
 
-import Navbar from '@/components/layouts/Navbar';
 import ProductAddToCartButton from '@/components/product/ProductAddToCartButton';
 import ProductBreadcrumbBox from '@/components/product/ProductBreadcrumbBox';
 import ProductColorBox from '@/components/product/ProductColorBox';
 import ProductImageGallery from '@/components/product/ProductImageGallery';
 import Review from '@/components/product/ProductReviewBox';
-import type { IProduct } from '@/interfaces/Product';
+import ProductTemplate from '@/components/template/ProductTemplate';
 import { ProductType } from '@/interfaces/Product';
 import { getProductType } from '@/utils';
 
 import type { NextPageWithLayout } from '../_app';
 
-const product: IProduct = {
+const product = {
   productId: `asd`,
   name: `LINNMON ลินมูน / ADILS อดิลส์`,
   price: 192,
@@ -148,12 +147,7 @@ const ProductByIDPage: NextPageWithLayout = () => {
 };
 
 ProductByIDPage.getLayout = (page) => {
-  return (
-    <>
-      <Navbar />
-      {page}
-    </>
-  );
+  return <ProductTemplate>{page}</ProductTemplate>;
 };
 
 export default ProductByIDPage;

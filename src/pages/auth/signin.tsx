@@ -51,6 +51,7 @@ const AuthSignInPage: NextPage<IProps> = ({ session }) => {
       throw new Error(error.message);
       // console.error(error.message);
     } else {
+      // eslint-disable-next-line no-console
       console.log(data);
 
       window.close();
